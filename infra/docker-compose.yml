@@ -8,7 +8,7 @@ services:
       - ./.env
   
   backend:
-    image: viktodor/foodgram
+    image: viktodor/foodgram:latest
     restart: always
     volumes:
       - static_value:/backend/static/
@@ -19,9 +19,9 @@ services:
       - ./.env
 
   frontend:
-    image: viktodor/frontend
+    image: viktodor/frontend:latest
     volumes:
-      - ../frontend/:/backend/result_build
+      - ../frontend/:/app/result_build
     depends_on:
       - backend
   
