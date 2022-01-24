@@ -1,16 +1,16 @@
+from api import filters, pagination, permissions
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import permissions, status, viewsets, mixins
+from rest_framework import mixins, permissions, status, viewsets
 from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from api import filters, permissions, pagination
-from .models import Favorite, Ingredient, ShoppingList, Recipe, Tag
-from .serializers import (CreateRecipeSerializer, FavouriteSerializer,
-                          IngredientSerializer, ShoppingListSerializer,
-                          ReadyRecipeSerializer, TagSerializer)
 from .file import send_file
+from .models import Favorite, Ingredient, Recipe, ShoppingList, Tag
+from .serializers import (CreateRecipeSerializer, FavouriteSerializer,
+                          IngredientSerializer, ReadyRecipeSerializer,
+                          ShoppingListSerializer, TagSerializer)
 
 
 class TagsViewSet(mixins.ListModelMixin,
@@ -34,7 +34,7 @@ class IngredientsViewSet(mixins.ListModelMixin,
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
-    queryset = Recipe.objects.all().order_by('-id')
+    queryset = Recipe.objects.all()
     permission_classes = [AllowAny, ]
     filter_backends = [DjangoFilterBackend]
     filterset_class = filters.RecipeFilter

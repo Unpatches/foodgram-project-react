@@ -3,10 +3,10 @@ from django.core.validators import MinValueValidator
 from drf_extra_fields.fields import Base64ImageField
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
-
 from users.serializers import CustomUserSerializer
-from .models import (Favorite, Ingredient, IngredientForRecipe, ShoppingList,
-                     Recipe, Tag)
+
+from .models import (Favorite, Ingredient, IngredientForRecipe, Recipe,
+                     ShoppingList, Tag)
 
 User = get_user_model()
 
@@ -64,17 +64,18 @@ class ReadyRecipeSerializer(serializers.ModelSerializer):
 
     def get_is_favorited(self, obj):
         request = self.context.get('request')
-        return (
-            False if not request or request.user.is_anonymous else
-            Favorite.objects.filter(recipe=obj, user=request.user).exists()
-        )
+        if not request or request.user.is_anonymous:
+            return False
+        return Favorite.objects.filter(recipe=obj, user=request.user).exists()
 
     def get_is_in_shopping_cart(self, obj):
         request = self.context.get('request')
-        return (
-            False if not request or request.user.is_anonymous else
-            ShoppingList.objects.filter(recipe=obj, user=request.user).exists()
-        )
+        if not request or request.user.is_anonymous:
+            return False
+        return ShoppingList.objects.filter(
+            recipe=obj,
+            user=request.user
+        ).exists()
 
 
 class FavouriteSerializer(serializers.ModelSerializer):
