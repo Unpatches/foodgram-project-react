@@ -19,11 +19,11 @@ services:
       - ./.env
 
   frontend:
-    image: viktodor/frontend
+    image: viktodor/frontend:v1
     volumes:
       - ../frontend/:/app/result_build/
     depends_on:
-      - db
+      - backend
   
   nginx:
     image: nginx:1.19.3
