@@ -1,21 +1,24 @@
-import csv
+import json
 
 from django.core.management.base import BaseCommand
+
 from recipes.models import Ingredient
 
 
 class Command(BaseCommand):
-    help = 'Загрузить таблицу ингридиентов в БД'
+    help = 'Creates entries with ingredients'
 
     def handle(self, *args, **options):
-        id = 0
-        with open('data/ingredients.csv', encoding='utf-8') as file:
-            reader = csv.reader(file)
-            for line in reader:
-                name, unit = line
-                Ingredient.objects.get_or_create(
-                    id=id,
-                    name=name,
-                    measurement_unit=unit
-                )
-                id += 1
+        count = 0
+        with open('data/ingredients.json', 'r', encoding='UTF-8') as ingr:
+            for ingredient in json.load(ingr):
+                try:
+                    ing, crt = Ingredient.objects.get_or_create(
+                        name=ingredient.get('name'),
+                        measurement_unit=ingredient.get('measurement_unit')
+                    )
+                except Exception as ex:
+                    print(f'Error add ingredient: {ex}')
+                print(f'Created {ing}' if crt is True else f'Skipped {ing}')
+                count += 1
+        print(f'Processed {count} elements!')
