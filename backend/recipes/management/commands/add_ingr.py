@@ -17,5 +17,5 @@ class Command(BaseCommand):
                     id=id,
                     name=name,
                     measurement_unit=unit
-                    )
+                )
                 id += 1
