@@ -12,4 +12,4 @@ urlpatterns = [
     path('auth/token/logout/', TokenDestroyView.as_view(),
          name='logout'),
     path('', include('djoser.urls')),
-    ]
+]
