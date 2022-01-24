@@ -113,7 +113,7 @@ class ShoppingListSerializer(serializers.ModelSerializer):
     def validate(self, data):
         user = data['user']
         recipe_id = data['recipe'].id
-        if ShoppingList.objects.filter(user=user, 
+        if ShoppingList.objects.filter(user=user,
                                        recipe__id=recipe_id).exists():
             raise ValidationError('Рецепт уже добавлен в список покупок')
         return data
