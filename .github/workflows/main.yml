@@ -64,8 +64,7 @@ jobs:
             sudo docker-compose up -d
             sudo docker-compose exec -T backend python manage.py makemigrations --noinput
             sudo docker-compose exec -T backend python manage.py migrate --noinput
-            sudo docker-compose exec -T backend python manage.py add_tag
-            sudo docker-compose exec -T backend python manage.py add_ingredient
+            sudo docker-compose exec -T backend python manage.py add_ingr
             sudo docker-compose exec -T backend python manage.py collectstatic --no-input
 
   send_message:
