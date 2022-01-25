@@ -1,6 +1,5 @@
 [
   {"name": "Завтрак", "color": "#008000", "slug": "breakfast"},
-  {"name": "Обед", "color": "#ff0000", "slug": "lunch"},
-  {"name": "Ужин", "color": "#4a61dd", "slug": "dinner"},
+  {"name": "Обед/Ужин", "color": "#ff0000", "slug": "dinner"},
   {"name": "Десерт", "color": "#ffc0cb", "slug": "dessert"}
 ]
