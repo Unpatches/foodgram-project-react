@@ -27,8 +27,8 @@ class RecipeIngredientInline(admin.TabularInline):
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
     inlines = (RecipeIngredientInline,)
-    list_display = ('pk', 'name', 'author', 'is_favorited')
-    search_fields = ('name', 'text', 'ingredients', 'author')
+    list_display = ('name', 'author', 'is_favorited')
+    search_fields = ('name', 'tags', 'author')
     list_filter = ('author', 'name', 'tags')
     empty_value_display = '- пусто -'
 
@@ -40,6 +40,7 @@ class RecipeAdmin(admin.ModelAdmin):
 class FavoriteAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'recipe')
     search_fields = ('recipe', )
+    empty_value_display = '- пусто -'
 
 
 @admin.register(ShoppingList)

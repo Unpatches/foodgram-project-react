@@ -67,8 +67,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        methods=['get', 'delete'],
-        permission_classes=[IsAuthenticated, ]
+        methods=['GET', 'DELETE'],
+        permission_classes=[permissions.IsAuthorOrAdmin ]
     )
     def favorite(self, request, pk=None):
         if request.method == 'GET':
