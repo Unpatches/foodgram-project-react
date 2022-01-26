@@ -7,7 +7,7 @@ from .models import IngredientForRecipe
 def send_file(request, filename):
     user = request.user
     ingredients = IngredientForRecipe.objects.filter(
-        recipe__purchase__user=user
+        recipe__shoppinglist__user=user
     ).values(
         'ingredient__name', 'ingredient__measurement_unit'
     ).annotate(

@@ -46,6 +46,25 @@ class RecipeViewSet(viewsets.ModelViewSet):
             CreateRecipeSerializer
         )
 
+    @staticmethod
+    def delete_method(request, pk, model):
+        get_object_or_404(
+            model,
+            user=request.user,
+            recipe=get_object_or_404(Recipe, id=pk)
+        ).delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @staticmethod
+    def post_method(request, pk, serializer):
+        data = {'user': request.user.id, 'recipe': pk}
+        serializer = serializer(
+            data=data, context={'request': request}
+        )
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
     @action(
         detail=True,
         methods=['POST', ],

@@ -1,9 +1,6 @@
 from django.contrib import admin
-from django.contrib.auth import get_user_model
 
-from .models import Follow
-
-User = get_user_model()
+from .models import Follow, User
 
 
 @admin.register(User)
@@ -15,6 +12,6 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Follow)
 class FollowAdmin(admin.ModelAdmin):
-    list_display = ('user', 'author')
-    search_fields = ('author', )
+    list_display = ('user', 'following')
+    search_fields = ('following', )
     empty_value_display = '-пусто-'

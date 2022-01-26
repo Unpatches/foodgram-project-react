@@ -8,12 +8,14 @@ from .models import (Favorite, Ingredient, IngredientForRecipe, Recipe,
 class IngredientAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_filter = ('name',)
+    empty_value_display = '- пусто -'
 
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
     list_display = ('name', 'color', 'slug')
     search_fields = ('name',)
+    empty_value_display = '- пусто -'
 
 
 class RecipeIngredientInline(admin.TabularInline):
@@ -24,20 +26,24 @@ class RecipeIngredientInline(admin.TabularInline):
 
 @admin.register(Recipe)
 class RecipeAdmin(admin.ModelAdmin):
-    inlines = (
-        RecipeIngredientInline,
-    )
-    list_display = ('name', 'text', 'cooking_time')
-    search_fields = ('name', 'text', 'ingredients')
-    empty_value_display = '- пусто -'
+    inlines = (RecipeIngredientInline,)
+    list_display = ('pk', 'name', 'author', 'is_favorited')
+    search_fields = ('name', 'text', 'ingredients', 'author')
     list_filter = ('author', 'name', 'tags')
+    empty_value_display = '- пусто -'
+
+    def is_favorited(self, obj):
+        return obj.is_favorited.all().count()
 
 
 @admin.register(Favorite)
 class FavoriteAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'recipe')
+    search_fields = ('recipe', )
 
 
 @admin.register(ShoppingList)
 class ShoppingListAdmin(admin.ModelAdmin):
     list_display = ('pk', 'user', 'recipe')
+    search_fields = ('recipe', )
+    empty_value_display = '- пусто -'
