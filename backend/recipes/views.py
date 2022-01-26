@@ -8,9 +8,9 @@ from rest_framework.response import Response
 
 from .file import send_file
 from .models import Favorite, Ingredient, Recipe, ShoppingList, Tag
-from .serializers import (CreateRecipeSerializer, FavouriteSerializer,
-                          IngredientSerializer, ReadyRecipeSerializer,
-                          ShoppingListSerializer, TagSerializer)
+from .serializers import (CreateRecipeSerializer, IngredientSerializer, 
+                          ReadyRecipeSerializer,ShoppingListSerializer, 
+                          TagSerializer)
 
 
 class TagsViewSet(mixins.ListModelMixin,
@@ -67,17 +67,16 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=True,
-        methods=['POST', ],
-        permission_classes=[permissions.IsAuthorOrAdmin]
+        methods=['get', 'delete'],
+        permission_classes=[IsAuthenticated, ]
     )
-    def favorite(self, request, pk):
-        return self.post_method(
-            request=request, pk=pk, serializer=FavouriteSerializer
-        )
+    def favorite(self, request, pk=None):
+        if request.method == 'GET':
+            return self.add_obj(Favorite, request.user, pk)
+        elif request.method == 'DELETE':
+            return self.delete_obj(Favorite, request.user, pk)
+        return None
 
-    @favorite.mapping.delete
-    def delete_favorite(self, request, pk):
-        return self.delete_method(request=request, pk=pk, model=Favorite)
 
     @action(
         detail=True,
