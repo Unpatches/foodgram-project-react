@@ -8,8 +8,8 @@ from rest_framework.response import Response
 
 from .file import send_file
 from .models import Favorite, Ingredient, Recipe, ShoppingList, Tag
-from .serializers import (CreateRecipeSerializer, IngredientSerializer, 
-                          ReadyRecipeSerializer,ShoppingListSerializer, 
+from .serializers import (CreateRecipeSerializer, IngredientSerializer,
+                          ReadyRecipeSerializer, ShoppingListSerializer,
                           TagSerializer)
 
 
@@ -76,7 +76,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
         elif request.method == 'DELETE':
             return self.delete_obj(Favorite, request.user, pk)
         return None
-
 
     @action(
         detail=True,
