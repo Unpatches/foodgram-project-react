@@ -19,6 +19,6 @@ class Command(BaseCommand):
                     )
                     print(f'Created {tg}' if crt is True else f'Skipped {tg}')
                 except Exception as ex:
-                    print(f'Error add tag: {ex}')
+                    print(print(f'Error add tag: {ex}'))
                 count += 1
         print(f'Processed {count} elements!')

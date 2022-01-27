@@ -3,29 +3,26 @@ from django.db import models
 
 
 class User(AbstractUser):
-    username = models.CharField(
-        max_length=254,
-        verbose_name='Имя пользователя',
-        help_text='Введите имя пользователя',
-        unique=True
-    )
     email = models.EmailField(
         max_length=254,
-        verbose_name='Адрес электронной почты',
-        help_text='Введите email',
-        unique=True
+        unique=True,
+        verbose_name='Почта'
+    )
+    username = models.CharField(
+        max_length=150,
+        unique=True,
+        blank=False,
+        verbose_name='Имя пользователя'
     )
     first_name = models.CharField(
-        max_length=254,
-        verbose_name='Имя',
-        help_text='Введите имя',
-        blank=True
+        max_length=150,
+        blank=False,
+        verbose_name='Имя'
     )
     last_name = models.CharField(
-        max_length=254,
-        verbose_name='Фамилия',
-        help_text='Введите фамилию',
-        blank=True
+        max_length=150,
+        blank=False,
+        verbose_name='Фамилия'
     )
 
     USERNAME_FIELD = 'email'
@@ -36,7 +33,7 @@ class User(AbstractUser):
         ordering = ('username',)
 
     def __str__(self):
-        return self.username
+        return self.email
 
 
 class Follow(models.Model):
