@@ -1,6 +1,6 @@
 [
-  {"name": "Завтрак", "color": "#008000", "slug": "breakfast"},
-  {"name": "Обед", "color": "#ff0000", "slug": "lunch"},
-  {"name": "Ужин", "color": "#4a61dd", "slug": "dinner"},
-  {"name": "Десерт", "color": "#ff0000", "slug": "dessert"}
+  {"id":1, "name": "Завтрак", "color": "#008000", "slug": "breakfast"},
+  {"id":2, "name": "Обед", "color": "#ff0000", "slug": "lunch"},
+  {"id":3, "name": "Ужин", "color": "#4a61dd", "slug": "dinner"},
+  {"id":4, "name": "Десерт", "color": "#ff0000", "slug": "dessert"}
 ]
