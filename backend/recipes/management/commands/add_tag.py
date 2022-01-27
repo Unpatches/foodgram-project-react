@@ -5,6 +5,7 @@ from recipes.models import Tag
 
 
 class Command(BaseCommand):
+    print('========1=======')
     help = 'Creates entries with tags'
 
     def handle(self, *args, **options):
