@@ -5,10 +5,10 @@ from recipes.models import Tag
 
 
 class Command(BaseCommand):
-    print('========1=======')
     help = 'Creates entries with tags'
 
     def handle(self, *args, **options):
+        print('========1=======')
         count = 0
         with open('data/tag.json', 'r', encoding='UTF-8') as tags:
             for tag in json.load(tags):
@@ -23,3 +23,4 @@ class Command(BaseCommand):
                     print(print(f'Error add tag: {ex}'))
                 count += 1
         print(f'Processed {count} elements!')
+        print('========2=======')
