@@ -35,7 +35,7 @@ class IngredientsViewSet(mixins.ListModelMixin,
 
 class RecipeViewSet(viewsets.ModelViewSet):
     queryset = Recipe.objects.all()
-    permission_classes = [AllowAny, ]
+    permission_classes = [permissions.IsAuthorOrAdmin]
     filter_backends = [DjangoFilterBackend]
     filterset_class = filters.RecipeFilter
     pagination_class = pagination.CustomPageNumberPaginator
